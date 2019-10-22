@@ -14,23 +14,25 @@
 
              ;; generate regex string for each category of keywords
              (x-keywords-regex (regexp-opt x-keywords 'words))
-             (x-constants-regex (regex-opt x-constants 'words))
-             (x-events-regex (regex-opt x-events) 'words)))
+             (x-constants-regex (regexp-opt x-constants 'words))
+             (x-events-regex (regexp-opt x-events 'words)))
       `(
         (,x-keywords-regex . font-lock-keyword-face)
         (,x-constants-regex . font-lock-constant-face)
         (,x-events-regex . font-lock-builtin-face)
         ;; FIXME: order is important ?
-        ))
+        )))
 
 ;;;###autoload
-(define-derived-mode ragel-mode cc-mode "ragel-mode"
+(define-derived-mode ragel-mode c-mode "ragel-mode"
   "Major mode for ediring ragel files"
 
   ;; code for syntax highlighting
   (setq font-lock-defaults '((ragel-mode-font-lock-keywords)))
   )
 
+;;(autoload 'ragel-mode "ragel" "Ragel-mode" t)
+(add-to-list 'auto-mode-alist '("\\.rl\\'" . ragel-mode))
 
 (provide 'init-ragel-mode)
 
