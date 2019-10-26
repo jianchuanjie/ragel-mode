@@ -20,12 +20,12 @@
         (,x-keywords-regex . font-lock-keyword-face)
         (,x-constants-regex . font-lock-constant-face)
         (,x-events-regex . font-lock-builtin-face)
-        ;; FIXME: order is important ?
+        ("action\\([^{]+?\\)[ ]+{" . (1 font-lock-function-name-face))
         )))
 
 ;;;###autoload
 (define-derived-mode ragel-mode c-mode "ragel-mode"
-  "Major mode for ediring ragel files"
+  "Major mode for editing ragel files"
 
   ;; code for syntax highlighting
   (setq font-lock-defaults '((ragel-mode-font-lock-keywords)))
