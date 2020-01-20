@@ -16,12 +16,16 @@
              (x-keywords-regex (regexp-opt x-keywords 'words))
              (x-constants-regex (regexp-opt x-constants 'words))
              (x-events-regex (regexp-opt x-events 'words)))
-      `(
-        (,x-keywords-regex . font-lock-keyword-face)
-        (,x-constants-regex . font-lock-constant-face)
-        (,x-events-regex . font-lock-builtin-face)
-        ("action\\([^{]+?\\)[ ]+{" . (1 font-lock-function-name-face))
-        )))
+        `(
+          (,x-keywords-regex . font-lock-keyword-face)
+          (,x-constants-regex . font-lock-constant-face)
+          (,x-events-regex . font-lock-builtin-face)
+          ("action\\([^{]+?\\)[ ]+{" . (1 font-lock-function-name-face))
+          ("[%@$][ ]?\\([^@$%{\n )]+\\)" . (1 font-lock-function-name-face))
+          ("[ ^]\\[\\|\\][ ?]" . font-lock-negation-char-face)
+          ("[ ^]\\[\\([^\n]+\\)\\][ ?]" . (1 font-lock-constant-face))
+
+          )))
 
 ;;;###autoload
 (define-derived-mode ragel-mode c-mode "ragel-mode"
